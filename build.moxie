@@ -1,0 +1,16 @@
+name: mygroup:artifact
+description: project for mygroup:artifact
+groupid: mygroup
+artifactid: artifact
+version: 0.0.0-SNAPSHOT
+packaging: jar
+apply: eclipse
+sourcedirectories:
+- compile 'src/main/java'
+- test 'src/test/java'
+resourcedirectories:
+- compile 'src/main/resources'
+- test 'src/test/resources'
+dependencies:
+- test 'junit'
+- build 'jacoco'
