@@ -20,6 +20,7 @@ import com.google.gson.Gson;
 public class FAS2Client {
 	private String FAS2username;
 	private String FAS2password;
+    private String topurl;
 	private Map <Integer, FASPerson> people;
 	private Map <Integer, FASGroup> groups;
 	
@@ -27,6 +28,7 @@ public class FAS2Client {
 		this.people = new HashMap<Integer, FASPerson>();
 		this.groups = new HashMap<Integer, FASGroup>();
         
+        this.topurl = topurl;
 		this.FAS2username = username;
 		this.FAS2password = password;
 		
@@ -198,7 +200,7 @@ public class FAS2Client {
 	
 	private String send_json_byid_request(String entitytype, Integer entityid) throws IOException {
 
-		String url = String.format("http://fas1.centos.lan/accounts/json/%s_by_id", entitytype);
+		String url = String.format("%s/json/%s_by_id", this.topurl, entitytype);
         String poststring = String.format("%s_id=%s&login=Login&password=%s&user_name=%s", entitytype, entityid, this.FAS2username, this.FAS2password);
         byte[] postData = poststring.getBytes( Charset.forName("UTF-8") );
         
@@ -223,7 +225,7 @@ public class FAS2Client {
 	
 	private String send_json_byname_request(String entitytype, String entityname) throws IOException {
 
-		String url = String.format("http://fas1.centos.lan/accounts/json/%s_by_name", entitytype);
+		String url = String.format("%s/json/%s_by_name", this.topurl, entitytype);
         String poststring = String.format("%sname=%s&login=Login&password=%s&user_name=%s", entitytype, entityname, this.FAS2username, this.FAS2password);
         byte[] postData = poststring.getBytes( Charset.forName("UTF-8") );
         
@@ -247,7 +249,7 @@ public class FAS2Client {
 
     private String send_request(String facility) throws IOException {
     	
-        String url = String.format("http://fas1.centos.lan/accounts/%s/list", facility);
+        String url = String.format("%s/%s/list", this.topurl, facility);
     	//String url = "http://localhost:8080";
         String poststring = String.format("search=*&login=Login&password=%s&user_name=%s", this.FAS2username, this.FAS2password);
         byte[] postData = poststring.getBytes( Charset.forName("UTF-8") );
