@@ -24,6 +24,12 @@ import org.centos.jFAS2.FAS2Client.FASGroup;
 public class FASAuthProvider extends UsernamePasswordAuthenticationProvider {
 	
 	private final ScheduledExecutorService scheduledExecutorService;
+    private static final String SETTING_FAS_SYNC_ENABLED = "fas.enabled";
+    private static final String SETTING_FAS_DELETE_REMOVED_USERS = "fas.deleteRemovedUsers";
+    private static final String SETTING_FAS_DELETE_REMOVED_TEAMS = "fas.deleteRemovedTeams";
+    private static final String SETTING_FAS_URL = "fas.url";
+    private static final String SETTING_FAS_USERNAME = "fas.username";
+    private static final String SETTING_FAS_PASSWORD = "fas.password";
 
     public FASAuthProvider() {
         super("fas");
@@ -42,14 +48,14 @@ public class FASAuthProvider extends UsernamePasswordAuthenticationProvider {
     }
     
     public void sync(){
-    	final boolean enabled = settings.getBoolean(Plugin.SETTING_FAS_SYNC_ENABLED, false); // TODO: Get this from the config
-    	final boolean deleteRemovedUsers = settings.getBoolean(Plugin.SETTING_FAS_DELETE_REMOVED_USERS, true);
-    	final boolean deleteRemovedTeams = settings.getBoolean(Plugin.SETTING_FAS_DELETE_REMOVED_TEAMS, true);
+    	final boolean enabled = settings.getBoolean(SETTING_FAS_SYNC_ENABLED, false); // TODO: Get this from the config
+    	final boolean deleteRemovedUsers = settings.getBoolean(SETTING_FAS_DELETE_REMOVED_USERS, true);
+    	final boolean deleteRemovedTeams = settings.getBoolean(SETTING_FAS_DELETE_REMOVED_TEAMS, true);
     	
     	if (enabled){
-            final String fasURL = settings.getRequiredString(Plugin.SETTING_FAS_URL);
-            final String fasUsername = settings.getRequiredString(Plugin.SETTING_FAS_USERNAME);
-            final String fasPassword = settings.getRequiredString(Plugin.SETTING_FAS_PASSWORD);
+            final String fasURL = settings.getRequiredString(SETTING_FAS_URL);
+            final String fasUsername = settings.getRequiredString(SETTING_FAS_USERNAME);
+            final String fasPassword = settings.getRequiredString(SETTING_FAS_PASSWORD);
 
     		logger.info("sync(): Synchronizing with FAS");
     		FAS2Client fas2client = new FAS2Client(fasURL, fasUsername, fasPassword);
