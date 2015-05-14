@@ -182,8 +182,18 @@ public class FASAuthProvider extends UsernamePasswordAuthenticationProvider {
 
     @Override
     public UserModel authenticate(String username, char[] password) {
-		return null;
-       
+        final String fasURL = settings.getRequiredString(SETTING_FAS_URL);
+        final String fasUsername = settings.getRequiredString(SETTING_FAS_USERNAME);
+        final String fasPassword = settings.getRequiredString(SETTING_FAS_PASSWORD);
+
+        String strpassword = new String(password);
+        FAS2Client fas2client = new FAS2Client(fasURL, fasUsername, fasPassword);
+
+        if(!fas2client.authenticate(username, strpassword)){
+            return null;
+        }
+
+        return userManager.getUserModel(username);
     }
     
     private void setUserAttributes(UserModel user, FASPerson fp){
