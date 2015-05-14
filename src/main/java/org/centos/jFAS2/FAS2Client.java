@@ -271,4 +271,31 @@ public class FAS2Client {
         reader.close();
         return outputstring;
     }
+
+    public boolean authenticate(String username, String password) {
+        String url = String.format("%s/json/person_by_username", this.topurl);
+        String poststring = String.format("username=%s&login=Login&password=%s&user_name=%s", username, password, username);
+        byte[] postData = poststring.getBytes( Charset.forName("UTF-8") );
+
+        HttpURLConnection http;
+
+        try{
+            http = (HttpURLConnection) ConnectionUtils.openConnection(url, null, null);
+            http.setRequestProperty("Accept","application/json");
+            //http.addRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0");
+            http.setRequestMethod("GET");
+            http.connect();
+
+            DataOutputStream poststream = new DataOutputStream(http.getOutputStream());
+        	poststream.write(postData);
+        	
+        	if ( http.getResponseCode() >= 400 ){
+        		return false;
+        	}
+        	
+            return true;
+        } catch (IOException e) {
+            return false;
+        }
+    }
 }
