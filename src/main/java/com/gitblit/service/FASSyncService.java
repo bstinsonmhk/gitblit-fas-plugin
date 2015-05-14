@@ -1,4 +1,4 @@
-package com.gitblit.plugin.fas;
+package com.gitblit.service;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import com.gitblit.IStoredSettings;
 import com.gitblit.Keys;
-import com.gitblit.plugin.fas.FASAuthProvider;
+import com.gitblit.auth.FASAuthProvider;
 
 public final class FASSyncService implements Runnable {
 

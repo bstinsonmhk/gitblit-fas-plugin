@@ -1,4 +1,4 @@
-package com.gitblit.plugin.fas;
+package com.gitblit.auth;
 
 
 import java.util.HashMap;
@@ -14,7 +14,7 @@ import com.gitblit.auth.AuthenticationProvider.UsernamePasswordAuthenticationPro
 import com.gitblit.models.TeamModel;
 import com.gitblit.models.UserModel;
 import com.gitblit.utils.StringUtils;
-import com.gitblit.plugin.fas.FASSyncService;
+import com.gitblit.service.FASSyncService;
 
 import org.centos.jFAS2.FAS2Client;
 import org.centos.jFAS2.FAS2Client.FASPerson;
