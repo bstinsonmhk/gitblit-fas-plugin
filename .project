@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>mygroup:artifact</name>
-	<comment>project for mygroup:artifact</comment>
+	<name>gitblit-fas-plugin</name>
+	<comment>Plugin to authenticate Gitblit to the Fedora Account System</comment>
 	<projects>
 	</projects>
 	<buildSpec>

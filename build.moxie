@@ -1,16 +1,66 @@
-name: mygroup:artifact
-description: project for mygroup:artifact
-groupid: mygroup
-artifactid: artifact
-version: 0.0.0-SNAPSHOT
-packaging: jar
-apply: eclipse
+name: gitblit-fas-plugin
+description: Plugin to authenticate Gitblit to the Fedora Account System
+groupid: com.gitblit.plugin
+artifactid: fas 
+version: 0.0.1-SNAPSHOT
+packaging: zip
+inceptionYear: 2015
+organization: centos.org
+url: "http://www.centos.org"
+
+licenses:
+- {
+    name: MIT
+    url: http://opensource.org/licenses/mit-license.php
+  }
+
+developers:
+- {
+    id: bstinson
+    name: Brian Stinson
+    url: "http://www.bstinson.com"
+    organization: CentOS
+    organizationUrl: "http://www.centos.org"
+    roles: developer
+  }
+
 sourcedirectories:
 - compile 'src/main/java'
-- test 'src/test/java'
+
 resourcedirectories:
 - compile 'src/main/resources'
-- test 'src/test/resources'
+
+mainclass: com.gitblit.plugin.fas.Plugin
+
+tasks: {
+	'mx:javac' : {
+        source: 1.7
+        target: 1.7
+        compiler: javac1.7
+        encoding: UTF-8
+        # stop complaints about bootstrap classpath when compiling with Java 7
+        compilerArgs: '-Xlint:-options'
+    }
+}
+
+apply: eclipse, intellij, pom
+
+dependencyDirectory: ext
+
+registeredRepositories:
+- {
+    id: 'com.gitblit'
+    url: 'http://gitblit.github.io/gitblit-maven/'
+    affinity: [ 'com.gitblit' ]
+  }
+
+repositories: 'central', 'com.gitblit'
+
+properties: {
+    gitblit.version: 1.5.0
+}
+
 dependencies:
+- provided 'com.gitblit:gitblit:${gitblit.version}'
 - test 'junit'
 - build 'jacoco'
