@@ -156,27 +156,6 @@ public class FAS2Client {
 		FASPerson[] unapproved_people;
 	}
 	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-		FAS2Client f = new FAS2Client("http://fas1.centos.lan","admin","admin");
-		
-		for (Map.Entry<Integer, FASPerson> fu : f.getPeople().entrySet()){
-			System.out.println(fu.getValue().username);
-		}
-		
-		f.getPeople();
-		
-		for (Map.Entry<Integer, FASGroup> fg: f.getGroups().entrySet()){
-			FASGroup g = fg.getValue();
-			System.out.println(String.format("===== Members of: %s =======", g.name));
-			for (FASPerson p : g.members){
-				System.out.println(p.username);
-			}
-		}
-
-	}
-	
 	private FASGroup get_individual_group(String groupname){
 		try {
 			return new Gson().fromJson(this.send_json_byname_request("group", groupname), IndividualGroupResponse.class).group;
