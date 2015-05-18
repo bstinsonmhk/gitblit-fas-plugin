@@ -222,7 +222,7 @@ public class FASAuthProvider extends UsernamePasswordAuthenticationProvider {
             int syncInterval = settings.getInteger(this.SETTING_FAS_SYNCINTERVAL, 5); 
     		long fasSyncPeriod = syncInterval * 60000; // milliseconds
     		int delay = 1;
-    		logger.info("Gitblit will sync from FAS every %d minute(s)" % syncInterval);
+    		logger.info("Gitblit will sync from FAS every {} minute(s)", syncInterval);
     		scheduledExecutorService.scheduleAtFixedRate(fasSyncService, delay, fasSyncPeriod, TimeUnit.MILLISECONDS);
     	} else {
     		logger.info("FAS Sync is disabled");
