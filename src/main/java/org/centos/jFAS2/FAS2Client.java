@@ -201,7 +201,7 @@ public class FAS2Client {
 	private String send_json_byid_request(String entitytype, Integer entityid) throws IOException {
 
 		String url = String.format("%s/json/%s_by_id", this.topurl, entitytype);
-        String poststring = String.format("%s_id=%s&login=Login&password=%s&user_name=%s", entitytype, entityid, this.FAS2username, this.FAS2password);
+        String poststring = String.format("%s_id=%s&login=Login&password=%s&user_name=%s", entitytype, entityid, this.FAS2password, this.FAS2username);
         byte[] postData = poststring.getBytes( Charset.forName("UTF-8") );
         
         HttpURLConnection http;
@@ -226,7 +226,7 @@ public class FAS2Client {
 	private String send_json_byname_request(String entitytype, String entityname) throws IOException {
 
 		String url = String.format("%s/json/%s_by_name", this.topurl, entitytype);
-        String poststring = String.format("%sname=%s&login=Login&password=%s&user_name=%s", entitytype, entityname, this.FAS2username, this.FAS2password);
+        String poststring = String.format("%sname=%s&login=Login&password=%s&user_name=%s", entitytype, entityname, this.FAS2password, this.FAS2username);
         byte[] postData = poststring.getBytes( Charset.forName("UTF-8") );
         
         HttpURLConnection http;
@@ -251,7 +251,7 @@ public class FAS2Client {
     	
         String url = String.format("%s/%s/list", this.topurl, facility);
     	//String url = "http://localhost:8080";
-        String poststring = String.format("search=*&login=Login&password=%s&user_name=%s", this.FAS2username, this.FAS2password);
+        String poststring = String.format("search=*&login=Login&password=%s&user_name=%s", this.FAS2password, this.FAS2username);
         byte[] postData = poststring.getBytes( Charset.forName("UTF-8") );
         
         HttpURLConnection http;
