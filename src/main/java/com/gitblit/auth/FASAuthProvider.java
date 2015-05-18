@@ -30,6 +30,7 @@ public class FASAuthProvider extends UsernamePasswordAuthenticationProvider {
     private static final String SETTING_FAS_URL = "fas.url";
     private static final String SETTING_FAS_USERNAME = "fas.username";
     private static final String SETTING_FAS_PASSWORD = "fas.password";
+    private static final String SETTING_FAS_SYNCINTERVAL = "fas.syncinterval";
 
     public FASAuthProvider() {
         super("fas");
@@ -218,9 +219,10 @@ public class FASAuthProvider extends UsernamePasswordAuthenticationProvider {
     	FASSyncService fasSyncService = new FASSyncService(settings, this);
     	
     	if (fasSyncService.isReady()){
-    		long fasSyncPeriod = 60000; // milliseconds
+            int syncInterval = settings.getInteger(this.SETTING_FAS_SYNCINTERVAL, 5); 
+    		long fasSyncPeriod = syncInterval * 60000; // milliseconds
     		int delay = 1;
-    		logger.info("Gitblit will sync from FAS every minute");
+    		logger.info("Gitblit will sync from FAS every %d minute(s)" % syncInterval);
     		scheduledExecutorService.scheduleAtFixedRate(fasSyncService, delay, fasSyncPeriod, TimeUnit.MILLISECONDS);
     	} else {
     		logger.info("FAS Sync is disabled");
