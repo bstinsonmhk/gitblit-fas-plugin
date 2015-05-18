@@ -1,7 +1,7 @@
 name: gitblit-fas-plugin
 description: Plugin to authenticate Gitblit to the Fedora Account System
 groupid: com.gitblit.plugin
-artifactid: fas 
+artifactid: gitblit-fas 
 version: 0.0.1-SNAPSHOT
 packaging: zip
 inceptionYear: 2015
